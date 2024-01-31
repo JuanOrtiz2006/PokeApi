@@ -2,6 +2,7 @@
 import { DomController } from '@ionic/angular';
 import { APIServiceService } from './../Services/apiservice.service';
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 // Define el componente HomePage con su selector, plantilla y estilos.
 @Component({
@@ -13,7 +14,7 @@ import { Component } from '@angular/core';
 export class HomePage {
 
     // Constructor del componente que recibe una instancia del servicio APIServiceService.
-  constructor(private api: APIServiceService, private sanitizer: DomController) {}
+  constructor(private api: APIServiceService, private sanitizer: DomSanitizer) {}
 
   pokemonNombre!: string;
   pokemonID!: number;
@@ -28,7 +29,10 @@ export class HomePage {
       this.api.getPokemonID(id).subscribe((response => {
 
         this.pokemonNombre = response.name;
-        console.log(this.pokemonNombre);
+        const imgUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + this.pokemonID + '.png';
+    
+        // Sanitizar URL 
+        this.pokemonImagen = this.sanitizer.bypassSecurityTrustUrl(imgUrl);
 
 
       }));
@@ -45,7 +49,11 @@ export class HomePage {
 
         this.pokemonID = response.id;
 
-        console.log(this.pokemonID);
+        const imgUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + this.pokemonID + '.png';
+    
+        // Sanitizar URL 
+        this.pokemonImagen = this.sanitizer.bypassSecurityTrustUrl(imgUrl);
+
         
       }));
     } catch (error) {
@@ -54,19 +62,5 @@ export class HomePage {
     }
   }
 
-  getPokemonDataImg(img: any) {
-    try {
-      // Llama al método getPokemon del servicio y se suscribe al observable.
-      this.api.getPokemonImg(img).subscribe((response => {
-
-        this.pokemonImagen = response.img;
-        console.log(this.pokemonImagen);
-        
-      }));
-    } catch (error) {
-      // Captura cualquier error que pueda ocurrir durante la suscripción y lo imprime en la consola.
-      console.log(error);
-    }
-  }
 
 }

@@ -9,12 +9,12 @@
       <!--Primera carta-->
       <ion-card class="nombre">
         <ion-card-header>
-          <ion-searchbar [(ngModel)]="pokemonID"  (keypress)="getPokemonDataID(pokemonID)" (keypress)="getPokemonDataImg(pokemonImagen)"></ion-searchbar>
+          <ion-searchbar [(ngModel)]="pokemonID"  (keypress)="getPokemonDataID(pokemonID)" ></ion-searchbar>
           <ion-card-title>{{pokemonNombre}}</ion-card-title>
         </ion-card-header>
     
         <ion-card-content>
-          <img src="pokemonImagen" />
+          <img [src]="pokemonImagen" />
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -23,12 +23,12 @@
     <ion-col size-sm="6" size-lg="6" size-md="6" size-xs="6">
       <ion-card class="id">
         <ion-card-header>
-          <ion-searchbar [(ngModel)]="pokemonNombre"  (keypress)="getPokemonDataName(pokemonNombre)" (keypress)="getPokemonDataImg(pokemonImagen)"></ion-searchbar>
+          <ion-searchbar [(ngModel)]="pokemonNombre"  (keypress)="getPokemonDataName(pokemonNombre)" ></ion-searchbar>
           <ion-card-title>{{pokemonID}}</ion-card-title>
         </ion-card-header>
       
         <ion-card-content>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <img [src]="pokemonImagen" />
         </ion-card-content>
       </ion-card>
     </ion-col>

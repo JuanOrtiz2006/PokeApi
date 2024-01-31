@@ -30,9 +30,5 @@ export class APIServiceService {
     return this.http.get(this.apiUrl+"pokemon/"+name);
   }
 
-  getPokemonImg(img: number): Observable<any> {
-    // Utiliza el método get del HttpClient para realizar una solicitud GET a la URL de la PokeAPI con el nombre del Pokémon.
-    return this.http.get(this.imgUrl+"pokemon/"+img + ".png");
-  }
 }
 
